@@ -1,0 +1,36 @@
+@import "~main.scss";
+
+.ProfileItem {
+  width: 90%;
+  // height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  box-shadow: $material-shadow;
+  border-radius: 5px;
+  margin: 10px;
+  // padding: 6px;
+  box-sizing: border-box;
+  // background-color: $main-color;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  &:hover {
+    box-shadow: $main-shadow;
+  }
+  .ProfileItemProperties{
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    >span{
+      margin: 5px 0;
+    }
+    .ProfileItemImageName{
+      font-size: 20px;
+    }
+    .ProfileItemImageValue{
+      font-size: 18px;
+      color: #999;
+    }
+  }
+}

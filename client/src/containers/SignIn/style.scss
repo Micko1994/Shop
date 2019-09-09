@@ -1,0 +1,39 @@
+@import "~main.scss";
+
+.Main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .sign_container{
+        margin-top: 50px;
+        width: 400px;
+        box-shadow: $main-shadow;
+        background-color: #fff;
+        z-index: 50;
+        .sign_container_main{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 10px;
+        }
+    }
+}
+
+.Spinner {
+    width: 70px;
+    height: 70px;
+    background-color: #fff;
+    border: 3px solid #e6e6e6;
+    border-radius: 100%;
+    animation: spinnerAnimate 1s infinite;
+    border-top-color:  $main-color;
+    margin: 3rem auto;
+    align-self: center;
+  }
+
+
+  @keyframes spinnerAnimate {
+    from { transform: rotate(0) }
+    to { transform: rotate(360deg) }
+  }

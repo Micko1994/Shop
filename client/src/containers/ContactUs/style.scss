@@ -1,0 +1,52 @@
+@import "~main.scss";
+
+.ContactUs {
+  width: 100%;
+  .contact-us-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .contact-us-content_main{
+      width: 70%;
+      box-shadow: $main-shadow;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px;
+      min-height: 500px;
+      .contact-us-content_info{
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 10px;
+        >span{
+          font-size: 18px;
+          padding: 5px;
+        }
+        .contact-us-content_info_icon{
+          padding: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          >span{
+            margin-right: 5px;
+          }
+        }
+      }
+      .contact-us-content_form{
+        width: 40%;
+        height: 270px;
+      }
+    }
+  }
+}
+
+.Icon{
+  svg {
+    fill: $main-color;
+  }
+}

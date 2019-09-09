@@ -1,0 +1,46 @@
+@import "~main.scss";
+
+.GoodItem {
+  width: 260px;
+  // height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  box-shadow: $material-shadow;
+  border-radius: 5px;
+  margin: 10px;
+  // padding: 6px;
+  box-sizing: border-box;
+  // background-color: $main-color;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  .GoodItemImage {
+    width: 100%;
+    height: 260px;
+    background-size: cover;
+  }
+  &:hover {
+    box-shadow: $main-shadow;
+  }
+  .GoodItemProperties{
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    >span{
+      margin: 5px 0;
+    }
+    .GoodItemImageName{
+      font-size: 22px;
+    }
+    .GoodItemImageOldPrice{
+      font-size: 18px;
+      color: #999;
+      text-decoration: line-through;
+    }
+    .GoodItemImageNewPrice{
+      font-size: 22px;
+      font-weight: 700;
+    }
+  }
+}

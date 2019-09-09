@@ -1,0 +1,31 @@
+@import "~main.scss";
+
+.chooseItem{
+  ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    flex-wrap: wrap;
+    padding: 0;
+    margin:0;
+    li{
+      width: 60px;
+      // height: 50px;
+      text-align: center;
+      list-style: none;
+      padding: 8px;
+      // border: 1px solid $main-color;
+      border-radius: 2px;
+      margin: 5px;
+      cursor: pointer;
+      box-shadow: $material-shadow;;
+      &:hover {
+        box-shadow: $material-header-shadow;
+      }    
+      &.selected {
+        background-color: $main-color;
+        color: #fff;
+      }
+    }
+  }
+}
