@@ -12,7 +12,7 @@ import {
     REGISTER_FAIL
 } from './types';
 
-import { CreateActionCreator } from 'helpers';
+// import { CreateActionCreator } from 'helpers';
 
 
 // Check token & load user

@@ -1,9 +1,6 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
 
 import {ShopButton} from '../../components/common'
-import {GoodItem} from '../../components/common'
-import {SettingsListsItems} from '../../components/common'
 
 // import {
 //     fetchPosts,
@@ -23,9 +20,6 @@ import './Main.scss';
 
 import { selectLanguage } from 'translate';
 
-
-const mapStateToProps = ({ posts }) => ({ posts });
-
 // @connect(mapStateToProps, {
 //     fetchPosts,
 //     fetchSinglePost,
@@ -34,8 +28,7 @@ const mapStateToProps = ({ posts }) => ({ posts });
 //     deletePost,
 // })
 
-@withRouter
-export default class Home extends PureComponent {
+export default class Home extends Component {
 
     // componentWillMount() {
     //     this.props.fetchPosts();
@@ -48,19 +41,20 @@ export default class Home extends PureComponent {
         language: this.lang,
     };
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps() {
         this.updateState();
     }    
 
     updateState() {
+        const { props } = this
         this.setState({
-            language: this.props.history.location.pathname.split('/')[this.props.history.location.pathname.split('/').length - 1]
+            language: props.history.location.pathname.split('/')[props.history.location.pathname.split('/').length - 1]
         });
     }
 
     render() {
         // const { posts } = this.props;
-
+        console.log(123123123)
         return (
             <section className="HomeMain">
                 <div className="HomeMainContainer">

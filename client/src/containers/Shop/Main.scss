@@ -1,7 +1,126 @@
+@import "~main.scss";
+
 .ShopContentMain {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    align-content: flex-start;
     justify-content: space-around;
     padding: 20px;
+    background-color: $main-background-color;
+    .ShopContentMainAsideMain{
+        width: 250px;
+        height: 700px;
+        min-width: 200px;
+        box-shadow: $main-shadow;
+        border-radius: 5px;
+        background-color: #fff;
+        .ShopContentMainAsideTypes{
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            // align-content: center;
+            padding: 0.5em 1.25em;
+            color: rgb(84, 95, 126);
+            cursor: pointer;
+            &:hover {
+                background-color: rgb(238, 245, 255);
+            };
+            &.selected{
+                color: rgb(56, 125, 255);
+            }
+            .ShopContentMainAsideMainText{
+                margin: 5px 0 0 20px;
+                color: rgb(84, 95, 126);
+            }
+        }
+    }
+    .ShopContentMainGoods{
+        flex-grow: 1;
+        .ShopContentMainGoodItems{
+            margin-top: 10px;
+        }
+    }
+}
+
+.ShopInputComponent{
+    position: relative;
+    height: 2.5em;
+    width: 300px;
+    input{
+        height: 100%;
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        outline: none;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgb(237, 239, 246);
+        border-image: initial;
+        padding: 0px 2em 0px 1.25em;
+        border-radius: 0.625em;
+        font-size: 16px;                
+        color: rgb(84, 95, 126);
+        &:focus{
+            box-shadow: $main-color 0px 0px 2px;
+        }
+    }
+    span{
+        position: absolute;
+        right: 0;
+        height: 100%;
+        align-items: center;
+        padding: 0px 0.8em;
+        display: inline-flex;    
+    }
+}
+
+.orderBySelectComponent{
+    display: flex;
+    position: relative;
+    max-width: 100%;
+    width: 110px;
+    cursor: pointer;
+    box-sizing: border-box;
+    background-color: rgb(255, 255, 255);
+    justify-content: space-between;
+    align-items: center;
+    height: 2.5em;
+    padding: 0px 1.25em;
+    border-width: 1px 1px 0px;
+    border-style: solid;
+    border-color: rgb(237, 239, 246);
+    border-image: initial;
+    border-radius: 0.625em;
+    color: rgb(84, 95, 126);
+    .selectComponentCurrentValue{
+        padding: 0.7em 1.25em; 
+    }
+    .selectComponentValues{
+        position: absolute;
+        top: 39px;
+        width: 110px;
+        >div{
+            border-width: 0 1px 0 1px;
+            border-style: solid;
+            border-color: rgb(237, 239, 246);        
+            background-color: rgb(255, 255, 255);
+            text-align: center;
+            padding: 0.7em 1.25em;
+            &.selected {
+                color: $main-color;
+            }
+            &:hover {
+                background-color: rgb(238, 245, 255);
+            };
+        }
+        >div:last-child{
+            border-bottom-left-radius: 0.625em;
+            border-bottom-right-radius: 0.625em;
+        }
+    }
+}
+.big{
+    border-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }

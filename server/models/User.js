@@ -24,6 +24,11 @@ const UserSchema = new Schema({
     register_date: {
         type: Date,
         default: Date.now
+    },
+    role:{
+        type: String,
+        required: false,
+        default: 'member'
     }
 });
 

@@ -4,11 +4,11 @@ export default class CreateActionCreator {
 
     static read = ({ type, ...options }) => CreateActionCreator.dispatch(Fetch.get(options), type);
 
-    static create = ({ type, ...options }) => CreateActionCreator.dispatch(Fetch.post(options), `${type}`);
+    static create = ({ type, ...options }) => CreateActionCreator.dispatch(Fetch.post(options), `${type}_CREATE`);
 
-    static update = ({ type, ...options }) => CreateActionCreator.dispatch(Fetch.put(options), `${type}`);
+    static update = ({ type, ...options }) => CreateActionCreator.dispatch(Fetch.patch(options), `${type}_UPDATE`);
 
-    static delete = ({ type, ...options }) => CreateActionCreator.dispatch(Fetch.delete(options), `${type}`);
+    static delete = ({ type, ...options }) => CreateActionCreator.dispatch(Fetch.delete(options), `${type}_DELETE`);
 
     static dispatch = (promise, type) => dispatch => {
         promise
@@ -17,7 +17,7 @@ export default class CreateActionCreator {
                 payload: response,
             }))
             .catch(error => dispatch({
-                type: `${type}`,
+                type: `${type}_FAILURE`,
                 payload: error,
             }));
 

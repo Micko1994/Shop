@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 
-import { MainImageBlock } from 'components/common';
-
 import { selectLanguage } from 'translate';
 
 import './style.scss';

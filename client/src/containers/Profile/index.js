@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
 import {
     withRouter,
-    NavLink
 } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { loadUser } from '../../actions/authActions';
+// import { loadUser } from '../../actions/authActions';
 import store from '../../store'
 
 import { selectLanguage } from 'translate';
@@ -25,24 +24,19 @@ class Profile extends PureComponent{
     };
     componentDidMount() {
         this.setState({isLoading: !this.state.isLoading})
-        store.dispatch(loadUser())
+        // store.dispatch(loadUser())
     }
-
-    // componentWillMount(){
-    //     this.setState({isLoading: !this.state.isLoading})
-    // }
 
     componentWillReceiveProps(nextProps) {
         this.updateState();
     }
     
     componentWillUpdate(){
-        console.log('this.props:00000:', this.props)
         this.isUserLoad()
     }
 
     isUserLoad = () => (
-        this.props.auth && this.props.auth.user ? this.setState({isLoading: !this.state.isLoading}) : null
+        this.props.auth && this.props.auth.user ? this.setState({isLoading: false}) : null
     )
 
     updateState() {
@@ -51,17 +45,14 @@ class Profile extends PureComponent{
         });
     }
 
-    toggleIsLoading = () => (
-        this.setState({isLoading: !this.state.isLoading})
-    )
 
     generateMyProfileInfo = () => {
         if(this.state.isLoading) {
             return <div className="Spinner"/>
         } 
-        // else if(!this.props.auth.user){
-        //     this.props.history.push('/sign_in/' + this.state.language)
-        // }
+        else if(!this.props.auth.user){
+            this.props.history.push('/sign_in/' + this.state.language)
+        }
         else  {
             return (
             <div className="my_profile_content_main">

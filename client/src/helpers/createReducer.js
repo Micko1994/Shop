@@ -5,23 +5,18 @@ const createReducer = (type, uniqueKey, notShowError) => (state = null, action) 
     switch (action.type) {
         case type:
             return payload;
-        case `${type}`:
+        case `${type}_CREATE`:
             return uniqueKey
-                ? { 
-                    payload, 
-                    ...state,
-                    isAuthenticated: true,
-                    isLoading: false    
-                }
-                : payload
-        case `${type}`:
+                ? [ payload, ...state ]
+                : payload;
+        case `${type}_UPDATE`:
             return uniqueKey
                 ? state.map(item => item[uniqueKey] === payload[uniqueKey]
                     ? { ...item, ...payload }
                     : item
                 )
                 : payload
-        case `${type}`:
+        case `${type}_DELETE`:
             return uniqueKey
                 ? state.filter(item => item[uniqueKey] !== payload[uniqueKey])
                 : payload;

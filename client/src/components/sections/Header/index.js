@@ -1,7 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Logout from '../../auth/Logout';
+import { logout } from '../../../actions/authActions'
+import {GoodItemMini} from '../../common'
+import ReactDOM from 'react-dom';
 import {
     withRouter,
     NavLink
@@ -11,45 +13,35 @@ import './style.scss'
 
 import { Icon } from '../../../components/common';
 
-
 import { selectLanguage } from 'translate';
-import { Profile } from '../../../containers';
-import Button from '@material-ui/core/Button';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList';
 
-
-
-
-@withRouter
 class Header extends Component {
     pathname = this.props.history.location.pathname.split('/')
     lang = this.pathname[this.pathname.length - 1]
     first = this.pathname[1]
     link = (this.first === 'uk' || this.first === 'ru' || this.first === 'am') ? 'home' : this.first ;
+    cardRef = null;
     state = {
-        isOpen: false,
+        isOpenMyProfile: false,
+        isOpenCart: false,
         dropdownOpen: false,
         language: this.lang,
         headerShown: false,
         isOpenMenu: false,
         link: this.link,
-        open: false
+        count: 0
     };
     
     static propTypes = {
         auth: PropTypes.object.isRequired
     };
     
-    toggle = () => {
-        this.setState({
-            isOpen: !this.state.isOpen,
-        });
-    };
+
+    // toggle = () => {
+    //     this.setState({
+    //         isOpen: !this.state.isOpen,
+    //     });
+    // };
     toggleDropDown = () => {
         this.setState({
             dropdownOpen: !this.state.dropdownOpen
@@ -61,9 +53,16 @@ class Header extends Component {
     }
     componentWillReceiveProps(nextProps){
         this.setState({ language: nextProps.lang })
+        this.updateState();
+    }   
+
+    updateState() {
+        // this.props.getCarts()
+        this.setState({
+            language: this.props.history.location.pathname.split('/')[this.props.history.location.pathname.split('/').length - 1],
+        });
     }
 
-    
     onChangeLanguage = (language) => {
         const pathName = this.props.history.location.pathname.split('/');
         pathName.pop();
@@ -88,92 +87,144 @@ class Header extends Component {
         });
     };
 
-    handleToggle = () => {
-        this.setState({open: !this.state.open})
+    onLogoutHandle = () => (
+        this.props.logout()
+    )
+        
+    handleToggleProfile = () => {
+        if (!this.state.isOpenMyProfile) {
+            // attach/remove event handler
+            document.addEventListener('click', this.handleOutsideClick, false);
+        } else {
+            document.removeEventListener('click', this.handleOutsideClick, false);
+        }
+        this.setState({isOpenMyProfile: !this.state.isOpenMyProfile});
+    }
+    
+    handleOutsideClick = (e) => {
+        const node = ReactDOM.findDOMNode(this.nodeProfile);
+        // ignore clicks on the component itself
+        if (node.contains(e.target)) {
+            return;
+        }
+        this.handleToggleProfile();
     }
 
-    anchorRef = React.createRef()
+    // handleToggleCart = () => {
+    //     if (!this.state.isOpenCart) {
+    //       // attach/remove event handler
+    //       document.addEventListener('click', this.handleOutsideClickCart, false);
+    //     } else {
+    //       document.removeEventListener('click', this.handleOutsideClickCart, false);
+    //     }
+    //     this.setState({isOpenCart: !this.state.isOpenCart});
+    // }
 
-    handleClose = (e) => {
-        this.anchorRef.current && this.anchorRef.current.contains(e.target) ? null : this.setState({open: false})
+    // handleOutsideClickCart = (e) => {
+    //     const node = ReactDOM.findDOMNode(this.nodeCart);
+    //     // ignore clicks on the component itself
+    //     if (node.contains(e.target)) {
+    //         return;
+    //     }
+    //     const card = ReactDOM.findDOMNode(this.cardRef)
+    //     if (card.contains(e.target)) {
+    //         return;
+    //     }
+    //     this.handleToggleCart();
+    // }
+
+    
+
+
+    generateMyProfileList = () => (
+        <div className='flexible_my_profile'>
+            <div className='arrow_modal'>
+            </div>
+            <ul className="flexible vertical jStart aCCenter my_profile_list">
+                <li className="flexible aCenter">
+                    <NavLink 
+                        to={`/profile/${this.state.language}`} 
+                        onClick={() => this.onChangeLink('profile')}
+                        className={this.state.link === 'profile' ? 'selected' : ''}
+                    >
+                        {this.state.language && selectLanguage(this.state.language).header_my_profile}
+                    </NavLink>
+                </li>
+                <li className="flexible aCenter">
+                    <NavLink 
+                        to={`/order/${this.state.language}`} 
+                        onClick={() => this.onChangeLink('order')}
+                        className={this.state.link === 'order' ? 'selected' : ''}
+                    >
+                        {this.state.language && selectLanguage(this.state.language).header_my_orders}
+                    </NavLink>
+                </li>
+                <li className="flexible aCenter">
+                    <NavLink 
+                        to={`/sign_in/${this.state.language}`} 
+                        onClick={() => this.onLogoutHandle()}
+                        className={this.state.link === 'sign_out' ? 'selected' : ''}
+                    >
+                        {this.state.language && selectLanguage(this.state.language).header_sign_out}
+                    </NavLink>
+                </li>
+            </ul>
+        </div>
+    )
+
+    handleCardRef = (ref) => {
+        this.cardRef = ref;
     }
+
+    generateCart = () => (
+        this.props.history.push('/my_cart/' + this.state.language)
+        // <div ref={this.handleCardRef} className='flexible_my_profile flexible_my_cart'>
+        //     <div className='arrow_modal'>
+        //     </div>
+        //     <div className="my_profile_list_cart">
+        //         your cart is empty
+        //         {/* <GoodItemMini /> */}
+        //         {/* {this.props.cart.payload.cart.goods.map((item) => (
+        //             <GoodItemMini 
+        //                 path={item.image}
+        //                 name={item.name}
+        //                 old_price={item.old_price}
+        //                 current_price={item.current_price}
+        //                 // onCartClick={(item) => this.onCartClick(item)}
+        //                 id={item._id}
+        //             />
+        //         ))
+        //         }
+        //         {console.log('this.state in header:', this.state)}
+        //         {console.log('this.props in header:', this.props)} */}
+        //     </div>
+        // </div>
+    )
 
     authLinks = () => (
-        <li 
-            style={{position: 'relative'}}
-            className="flexible aCenter"
-            onClick={() => this.handleToggle()}
-        >
-            <a >
-                Profile
-            </a>
-            {this.state.open ? 
-            <div style={{position: 'absolute', top: '40px', left: '0', width: '120px'}}>
-                <ul>
-                    <li className="flexible aCenter">
-                        <a>
-                            My Profile
-                        </a>
-                    </li>
-                    <li className="flexible aCenter">My Orders</li>
-                    <li className="flexible aCenter">Logout</li>
-                </ul>
+        <div className="flexible horizontal jAround jCenter auth_links_icons">
+            <div className="flexible auth_links_icons_item"  onClick={() => this.handleToggleProfile()} ref={node => this.nodeProfile = node}>
+                <Icon name='profile'/>
+                {this.state.isOpenMyProfile ? 
+                    this.generateMyProfileList()
+                : null }
             </div>
-            : null }
-        </li>
+            <div className="flexible auth_links_icons_item" ref={node => this.nodeProfile = node}>
+                <Icon name='wallet'/>
+            </div>
+            <div className="flexible auth_links_icons_item" ref={node => this.nodeCart = node}>
+                <Icon onClick={() => this.generateCart()} name='shopping_card'/>
+                {console.log('thi.props.cart 112233', this.props.cart)}
+                {console.log('thi.props.cart.count 11223344', this.props.count)}
+                {/* {this.props.cart.goods ? this.props.cart.goods.reduce((prev, cur) => prev + cur.count, 0) : null} */}
+                {/* {this.state.isOpenCart ? 
+                    this.generateCart()
+                : null } */}
+            </div>
+        </div>
     );
 
 
-//     <Button
-//     ref={this.anchorRef}
-//     aria-controls="menu-list-grow"
-//     aria-haspopup="true"
-//     onClick={() => this.handleToggle()}
-// >
-//     { this.props.auth.isAuthenticated ? 
-//         this.state.language && selectLanguage(this.state.language).header_my_profile
-//         : "My Profile"
-//     }
-
-// </Button>
-// <Popper 
-//     open={this.state.open} 
-//     anchorEl={this.anchorRef.current} 
-//     keepMounted 
-//     transition 
-//     disablePortal
-//     style={{
-//         top: '150px',
-//         position: 'relative'
-//     }}
-// >
-//     {({ TransitionProps, placement }) => (
-//         <Grow
-//             {...TransitionProps}
-//             style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-//         >
-//             <Paper id="menu-list-grow">
-//                 <ClickAwayListener onClickAway={this.handleClose}>
-//                     <MenuList>
-//                         <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-//                         <MenuItem onClick={this.handleClose}>My account</MenuItem>
-//                         <MenuItem onClick={this.handleClose}>Logout</MenuItem>
-//                     </MenuList>
-//                 </ClickAwayListener>
-//             </Paper>
-//         </Grow>
-//     )}
-// </Popper>
-
-
-    // <li className="flexible aCenter">
-    // <NavLink 
-    //     to={`/profile/${this.state.language}`} 
-    //     onClick={() => this.onChangeLink('contact-us')}
-    //     className={this.state.link === 'contact-us' ? 'selected' : ''}
-    // >
-    //     {this.state.language && selectLanguage(this.state.language).header_my_profile}
-    // </NavLink>
 
     guestLinks = () => (
         <li className="flexible aCenter">
@@ -209,8 +260,6 @@ class Header extends Component {
         </li>
     )
 
-
-
     navListForAll = () => (
             <ul className="flexible aCenter">
                 <li className="flexible aCenter">
@@ -240,26 +289,6 @@ class Header extends Component {
                         {this.state.language && selectLanguage(this.state.language).header_shop}
                     </NavLink>
                 </li>
-                <li className="flexible aCenter">
-                    <NavLink 
-                        to={`/about/${this.state.language}`} 
-                        onClick={() => this.onChangeLink('about')}
-                        className={this.state.link === 'about' ? 'selected' : ''}
-                    >
-                        {this.state.language && selectLanguage(this.state.language).header_about}
-                    </NavLink>
-                </li>
-                <li className="flexible aCenter">
-                    <NavLink 
-                        to={`/contact-us/${this.state.language}`} 
-                        onClick={() => this.onChangeLink('contact-us')}
-                        className={this.state.link === 'contact-us' ? 'selected' : ''}
-                    >
-                        {this.state.language && selectLanguage(this.state.language).header_contact_us}
-                    </NavLink>
-                </li>
-                {console.log('this.props.isAuthenticated:::111::', this.props.isAuthenticated)}
-                {console.log('this.props:::111::', this.props)}
                 { this.props.auth.isAuthenticated ? this.authLinks() : this.guestLinks() }
                 { this.getLanguagesIcons() }
             </ul>
@@ -271,18 +300,13 @@ class Header extends Component {
     // }
 
     render() {
-        const { isAuthenticated, user } = this.props.auth;
-        console.log("user",user)
-        console.log("this.props in header",this.props)
-        const id = user ? user.id : ''
-
         return (
             <header className={`Header ${this.state.headerShown ? 'headerShown' :''}`}>
             <nav className={`flexible jBetween ${this.state.isShadowShown ? 'isShadowShown' : ''}`}>
                 <div className="logo flexible aCenter">
-                    <NavLink to={`/${isAuthenticated ? 'admin' : this.state.language}`}>
+                    {/* <NavLink to={`/${isAuthenticated ? 'admin' : this.state.language}`}>
                         <div className="img" style={{ backgroundImage: `url()` }}/>
-                    </NavLink>
+                    </NavLink> */}
                 </div>
                 <div className="menu-wrapper" onClick={this.toggleHeader}>
                     <div className={`hamburger-menu ${this.state.headerShown ? 'animate' : ''}`}></div>
@@ -294,13 +318,10 @@ class Header extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    auth: state.auth
-});
-
-withRouter(Header)
+const mapStateToProps = ({ auth, cart }) => ({ auth, cart });
 
 export default connect(
     mapStateToProps,
-    null
-)(Header);
+    { logout }
+)(withRouter(Header));
+

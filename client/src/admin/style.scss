@@ -1,0 +1,44 @@
+@import "~main.scss";
+
+.Admin {
+  flex-grow: 1;
+  display: flex;
+  .Spinner {
+    width: 70px;
+    height: 70px;
+    background-color: #fff;
+    border: 3px solid #e6e6e6;
+    border-radius: 100%;
+    animation: spinnerAnimate 1s infinite;
+    border-top-color:  #000099;
+    margin: 3rem auto;
+    align-self: center;
+  }
+  .signInAdmin {
+    max-width: 60%;
+    margin: 20px auto;
+    .ValidatableForm {
+      .TextField:first-child {
+        margin-bottom: 15px;
+      }
+    }
+  }
+  .team-members-buttons {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    z-index: 5;
+    background-color: $main-background-color;
+    box-shadow: $material-header-shadow;
+    button {
+      margin: 10px;
+    }
+  }
+}
+
+
+@keyframes spinnerAnimate {
+  from { transform: rotate(0) }
+  to { transform: rotate(360deg) }
+}

@@ -12,10 +12,11 @@ export default class ShopButton extends Component{
             <Button
                 style={{
                     backgroundColor: '#9B59B6',
+                    width: this.props.width ? this.props.width : '100%'
                 }}            
                 variant="contained"
                 className={`ShopButton${this.props.disabled ? ' disabled' : ''}`}
-                // {...this.props}
+                {...this.props}
                 >
                 {this.props.children}
             </Button>

@@ -165,3 +165,48 @@ $bar-spacing: 10px;
   position: absolute;
   top: 150px;
 }
+
+.flexible_my_profile{
+  position: absolute;
+  top: 40px;
+  left: -80px;
+  z-index: 100;
+  background-color: #fff;
+  // width: 120px;
+  .arrow_modal{
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #fff;  
+    position: absolute;
+    left: calc(50% - 5px);
+    top: -9px;
+  }
+  .my_profile_list{
+    width: 100%;
+    box-shadow: $main-shadow;
+    li{
+      padding: 15px 20px;
+      margin: 0;
+      width: 135px;
+    }
+  }
+}
+
+.auth_links_icons{
+  width: 200px;
+  .auth_links_icons_item{
+    position: relative;
+  }
+}
+
+.flexible_my_cart{
+  left: -100px;
+  .my_profile_list_cart{
+    box-shadow: $main-shadow;
+    width: 175px;
+    padding: 15px 20px;
+    margin: 0;
+  }  
+}

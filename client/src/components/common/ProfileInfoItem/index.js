@@ -4,7 +4,6 @@ import './style.scss';
 import { selectLanguage } from 'translate';
 import {
     withRouter,
-    NavLink
 } from 'react-router-dom';
 
 @withRouter
@@ -37,7 +36,6 @@ export default class ProfileInfoItem extends PureComponent{
                 onClick={this.props.onClick}
                 title={this.state.language && selectLanguage(this.state.language)[`title_profile_${this.props.titleName}`]}
             >
-                {console.log("asasasa:", `title_profile_${this.props.name.toLowerCase()}`)}
                 <div className="ProfileItemProperties">
                     <span 
                         className={`ProfileItemImageName`}
