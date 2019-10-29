@@ -110,9 +110,7 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-withRouter(Profile)
-
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
     null
-)(Profile);
+)(Profile));

@@ -178,7 +178,7 @@ const mapStateToProps = ({ auth, error}) => ({
     error: error
 });
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
     { loginAdmin, clearErrors }
-)(withRouter(Admin));
+)(Admin));

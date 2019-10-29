@@ -175,7 +175,7 @@ class SignUp extends Component {
                                     onChange={this.onChange}
                                     value={this.state.name}
                                     validators={['required', 'maxStringLength:100', 'matchRegexp:^((?!http|www).){1,100}$']}
-                                    errorMessages={['this field is required', 'Your name is too long', 'has special symbols which are not allowed']}                
+                                    errorMessages={['this field is required', 'Your name is too long', 'has special symbols which are not allowed']}
                                 />
                                 <TextValidator
                                     variant="outlined"
@@ -266,7 +266,7 @@ class SignUp extends Component {
                                     style={{
                                         backgroundColor: '#9B59B6',
                                         color: '#fff'
-                                    }}            
+                                    }}
                                     className={'submit'}
                                 >
                                     <span
@@ -322,11 +322,6 @@ const mapStateToProps = state => ({
     error: state.error
 });
 
-withRouter(SignUp)
-
-export default connect(
-    mapStateToProps,
-    { register, clearErrors }
-)(SignUp);
+export default withRouter(connect(mapStateToProps, { register, clearErrors })(SignUp));
 
 

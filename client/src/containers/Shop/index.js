@@ -222,13 +222,14 @@ class Shop extends PureComponent {
         }
         else{
             return goodItems.map((item) => (
-                <GoodItem 
-                    path={item.image}
+                <GoodItem
+                    id={item._id}
+                    key={item._id}
                     name={item.name}
+                    path={item.image}
                     old_price={item.old_price}
                     current_price={item.current_price}
                     onCartClick={(item) => this.onCartClick(item)}
-                    id={item._id}
                 />
             ))
         }
@@ -341,7 +342,7 @@ const mapStateToProps = ({good, auth, cart}) => ({
     cart
 });
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
     { getGoods, changeCart, getCarts }
-)(withRouter(Shop));
+)(Shop));

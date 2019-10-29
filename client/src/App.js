@@ -9,9 +9,7 @@ import { loadUser } from './actions/authActions';
 import store from './store'
 
 import {
-    Header,
-    Footer,
-} from 'components/sections';
+    Header, Footer } from 'components/sections';
 
 import {
     Home,
@@ -50,10 +48,11 @@ class App extends PureComponent {
     }
 
     render() {
+        const { pathname } = this.props.location;
         return (
             <article>
             <Header 
-                lang={this.props.location.pathname.split('/')[this.props.location.pathname.split('/').length - 1]} 
+                lang={pathname.split('/')[pathname.split('/').length - 1]}
             />
             <Switch>
                 <Route
@@ -74,7 +73,7 @@ class App extends PureComponent {
                     component={Admin}
                 />
             </Switch>
-            <Footer lang={this.props.location.pathname.split('/')[this.props.location.pathname.split('/').length - 1]}/>
+            <Footer lang={pathname.split('/')[pathname.split('/').length - 1]}/>
         </article>
         );
     }

@@ -32,4 +32,3 @@ export const DELETE_CART_ITEM = 'DELETE_CART_ITEM';
 export const CART_LOADING = 'CART_LOADING';
 export const CART_COUNT = 'CART_COUNT';
 export const GET_USE_CART = 'GET_USE_CART';
-export default er = 'er'

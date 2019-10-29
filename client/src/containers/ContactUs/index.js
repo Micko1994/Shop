@@ -30,19 +30,20 @@ class ContactUs extends PureComponent{
     }    
 
     updateState() {
+        const { pathname } = this.props.history.location;
         this.setState({
-            language: this.props.history.location.pathname.split('/')[this.props.history.location.pathname.split('/').length - 1]
+            language: pathname.split('/')[pathname.split('/').length - 1]
         });
     }
 
     render(){
+        const { lang } = this.props.match.params;
+        const { language } = this.state;
         return (
             <section className="ContactUs withStretch flexible vertical">
                 <div className="contact-us-content page-content">
-                    <h2 
-                        className="header-text"
-                    >
-                        {selectLanguage(this.props.match.params.lang).contact_title}
+                    <h2 className="header-text">
+                        {selectLanguage(lang).contact_title}
                     </h2>
                     {/* {this.generateAboutUsInfo()} */}
                     <div className="contact-us-content_main">
@@ -59,10 +60,10 @@ class ContactUs extends PureComponent{
                                     fontWeight: 'bold',
                                 }}
                             >
-                                {selectLanguage(this.props.match.params.lang).need_help}
+                                {selectLanguage(lang).need_help}
                             </span>
                             <span>
-                                {selectLanguage(this.props.match.params.lang).need_help_description}
+                                {selectLanguage(lang).need_help_description}
                             </span>
                             <div className="contact-us-content_info_icon">
                                 <Icon name="mail" />
@@ -76,10 +77,10 @@ class ContactUs extends PureComponent{
                                     fontWeight: 'bold',
                                 }}
                             >
-                                {selectLanguage(this.props.match.params.lang).got_ideas}
+                                {selectLanguage(lang).got_ideas}
                             </span>
                             <span>
-                                {selectLanguage(this.props.match.params.lang).got_ideas_description}
+                                {selectLanguage(lang).got_ideas_description}
                             </span>
                             <div className="contact-us-content_info_icon">
                                 <Icon name="mail" />
@@ -97,7 +98,7 @@ class ContactUs extends PureComponent{
                                     required
                                     fullWidth
                                     id="email"
-                                    label={this.state.language && selectLanguage(this.state.language).sign_up_email}
+                                    label={language && selectLanguage(language).sign_up_email}
                                     name="email"
                                     value={this.props.auth && this.props.auth.user ? this.props.auth.user.email : null}
                                     autoComplete="email"
@@ -107,7 +108,7 @@ class ContactUs extends PureComponent{
                                 <TextField
                                     variant="outlined"
                                     id="text"
-                                    label={this.state.language && selectLanguage(this.state.language).text}
+                                    label={language && selectLanguage(language).text}
                                     multiline
                                     fullWidth
                                     rows="4"
@@ -128,7 +129,7 @@ class ContactUs extends PureComponent{
                                             color: '#fff'
                                         }}
                                     >
-                                        {this.state.language && selectLanguage(this.state.language).send}
+                                        {language && selectLanguage(language).send}
                                     </span>
                                 </Button>
                             </form>
@@ -141,14 +142,8 @@ class ContactUs extends PureComponent{
     }
 }
 
-
 const mapStateToProps = state => ({
     auth: state.auth
 });
 
-withRouter(ContactUs)
-
-export default connect(
-    mapStateToProps,
-    null
-)(ContactUs);
+export default withRouter(connect(mapStateToProps)(ContactUs));

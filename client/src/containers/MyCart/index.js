@@ -28,12 +28,13 @@ class MyCart extends PureComponent {
         else{
             return this.props.userGoods.map((item) => (
                 <UserGoodItem
+                    id={item._id}
+                    key={item._id}
                     path={item.image}
                     count={item.count}
                     name={item.name}
                     current_price={item.current_price}
                     // onCartClick={(item) => this.onCartClick(item)}
-                    id={item._id}
                 />
             ))
         }
@@ -83,7 +84,7 @@ const mapStateToProps = ({good, auth, cart, user}) => ({
     user
 });
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
     { getUserCart }
-)(withRouter(MyCart));
+)(MyCart));
