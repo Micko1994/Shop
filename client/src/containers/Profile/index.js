@@ -16,6 +16,7 @@ import { ProfileInfoItem } from '../../components/common'
 @withRouter
 @connect(mapStateToProps, null)
 class Profile extends PureComponent{
+
     pathname = this.props.history.location.pathname.split('/')
     lang = this.pathname[this.pathname.length - 1]    
     state = {
@@ -40,8 +41,9 @@ class Profile extends PureComponent{
     )
 
     updateState() {
+        const { pathname } = this.props.history.location;
         this.setState({
-            language: this.props.history.location.pathname.split('/')[this.props.history.location.pathname.split('/').length - 1]
+            language: pathname.split('/')[pathname.split('/').length - 1]
         });
     }
 
@@ -54,34 +56,38 @@ class Profile extends PureComponent{
             this.props.history.push('/sign_in/' + this.state.language)
         }
         else  {
+            const { auth } = this.props;
+            const { user } = this.props.auth;
+            const { language } = this.state;
+
             return (
             <div className="my_profile_content_main">
                 <div className="my_profile_content_info">
                     <ProfileInfoItem
                         titleName={'name'}
-                        name={this.state.language && selectLanguage(this.state.language).sign_up_name}
-                        value={this.props.auth && this.props.auth.user ? this.props.auth.user.name : 'Name'}
+                        name={language && selectLanguage(language).sign_up_name}
+                        value={auth && user ? user.name : 'Name'}
                     />
                     <ProfileInfoItem
                         titleName={'surname'}
-                        name={this.state.language && selectLanguage(this.state.language).sign_up_surname}
-                        value={this.props.auth && this.props.auth.user ? this.props.auth.user.surname : 'Surname'}
+                        name={language && selectLanguage(language).sign_up_surname}
+                        value={auth && user ? user.surname : 'Surname'}
                     />
                     <ProfileInfoItem
                         titleName={'email'}
-                        name={this.state.language && selectLanguage(this.state.language).sign_up_email}
-                        value={this.props.auth && this.props.auth.user ? this.props.auth.user.email : 'Email'}
+                        name={language && selectLanguage(language).sign_up_email}
+                        value={auth && user ? user.email : 'Email'}
                     />
                     <ProfileInfoItem
                         titleName={'address'}
-                        name={this.state.language && selectLanguage(this.state.language).sign_up_address}
-                        value={this.props.auth && this.props.auth.user ? this.props.auth.user.address : 'Address'}
+                        name={language && selectLanguage(language).sign_up_address}
+                        value={auth && user ? user.address : 'Address'}
                     />
                     <span style={{
                         fontSize: '15px',
                         color: '#9a9a9a'
                     }}>
-                        * {this.state.language && selectLanguage(this.state.language).profile_change_info}
+                        * {language && selectLanguage(language).profile_change_info}
                     </span>
                 </div>
             </div>

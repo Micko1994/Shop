@@ -200,6 +200,7 @@ class SignIn extends Component {
     }
 
     render() {
+        console.log(11111111111111111111111111111111111111)
         return (
             <section className="Main">
                 { this.generateAdminMAinPage() }
