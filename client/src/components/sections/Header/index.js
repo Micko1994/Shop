@@ -4,16 +4,17 @@ import PropTypes from 'prop-types';
 import { logout } from '../../../actions/authActions'
 import {GoodItemMini} from '../../common'
 import ReactDOM from 'react-dom';
-import {
-    withRouter,
-    NavLink
-} from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 
 import './style.scss'
 
 import { Icon } from '../../../components/common';
 
 import { selectLanguage } from 'translate';
+
+import  { Navigation } from './sections';
+
+
 
 class Header extends Component {
     pathname = this.props.history.location.pathname.split('/')
@@ -31,11 +32,11 @@ class Header extends Component {
         link: this.link,
         count: 0
     };
-    
+
     static propTypes = {
         auth: PropTypes.object.isRequired
     };
-    
+
 
     // toggle = () => {
     //     this.setState({
@@ -54,7 +55,7 @@ class Header extends Component {
     componentWillReceiveProps(nextProps){
         this.setState({ language: nextProps.lang })
         this.updateState();
-    }   
+    }
 
     updateState() {
         // this.props.getCarts()
@@ -82,7 +83,7 @@ class Header extends Component {
         } else if (key === 'resume') {
             this.props.history.push(`/resume/${this.state.language}`)
         }
-        this.setState({ 
+        this.setState({
             headerShown: !this.state.headerShown,
         });
     };
@@ -90,7 +91,7 @@ class Header extends Component {
     onLogoutHandle = () => (
         this.props.logout()
     )
-        
+
     handleToggleProfile = () => {
         if (!this.state.isOpenMyProfile) {
             // attach/remove event handler
@@ -100,7 +101,7 @@ class Header extends Component {
         }
         this.setState({isOpenMyProfile: !this.state.isOpenMyProfile});
     }
-    
+
     handleOutsideClick = (e) => {
         const node = ReactDOM.findDOMNode(this.nodeProfile);
         // ignore clicks on the component itself
@@ -133,7 +134,7 @@ class Header extends Component {
     //     this.handleToggleCart();
     // }
 
-    
+
 
 
     generateMyProfileList = () => (
@@ -142,8 +143,8 @@ class Header extends Component {
             </div>
             <ul className="flexible vertical jStart aCCenter my_profile_list">
                 <li className="flexible aCenter">
-                    <NavLink 
-                        to={`/profile/${this.state.language}`} 
+                    <NavLink
+                        to={`/profile/${this.state.language}`}
                         onClick={() => this.onChangeLink('profile')}
                         className={this.state.link === 'profile' ? 'selected' : ''}
                     >
@@ -151,8 +152,8 @@ class Header extends Component {
                     </NavLink>
                 </li>
                 <li className="flexible aCenter">
-                    <NavLink 
-                        to={`/order/${this.state.language}`} 
+                    <NavLink
+                        to={`/order/${this.state.language}`}
                         onClick={() => this.onChangeLink('order')}
                         className={this.state.link === 'order' ? 'selected' : ''}
                     >
@@ -160,8 +161,8 @@ class Header extends Component {
                     </NavLink>
                 </li>
                 <li className="flexible aCenter">
-                    <NavLink 
-                        to={`/sign_in/${this.state.language}`} 
+                    <NavLink
+                        to={`/sign_in/${this.state.language}`}
                         onClick={() => this.onLogoutHandle()}
                         className={this.state.link === 'sign_out' ? 'selected' : ''}
                     >
@@ -185,7 +186,7 @@ class Header extends Component {
         //         your cart is empty
         //         {/* <GoodItemMini /> */}
         //         {/* {this.props.cart.payload.cart.goods.map((item) => (
-        //             <GoodItemMini 
+        //             <GoodItemMini
         //                 path={item.image}
         //                 name={item.name}
         //                 old_price={item.old_price}
@@ -201,42 +202,11 @@ class Header extends Component {
         // </div>
     )
 
-    authLinks = () => (
-        <div className="flexible horizontal jAround jCenter auth_links_icons">
-            <div className="flexible auth_links_icons_item"  onClick={() => this.handleToggleProfile()} ref={node => this.nodeProfile = node}>
-                <Icon name='profile'/>
-                {this.state.isOpenMyProfile ? 
-                    this.generateMyProfileList()
-                : null }
-            </div>
-            <div className="flexible auth_links_icons_item" ref={node => this.nodeProfile = node}>
-                <Icon name='wallet'/>
-            </div>
-            <div className="flexible auth_links_icons_item" ref={node => this.nodeCart = node}>
-                <Icon onClick={() => this.generateCart()} name='shopping_card'/>
-                {console.log('thi.props.cart 112233', this.props.cart)}
-                {console.log('thi.props.cart.count 11223344', this.props.count)}
-                {/* {this.props.cart.goods ? this.props.cart.goods.reduce((prev, cur) => prev + cur.count, 0) : null} */}
-                {/* {this.state.isOpenCart ? 
-                    this.generateCart()
-                : null } */}
-            </div>
-        </div>
-    );
 
 
 
-    guestLinks = () => (
-        <li className="flexible aCenter">
-            <NavLink 
-                to={`/sign_in/${this.state.language}`} 
-                onClick={() => this.onChangeLink('sign_in')}
-                className={this.state.link === 'sign_in' ? 'selected' : ''}
-            >
-                {this.state.language && selectLanguage(this.state.language).header_sign_in}
-            </NavLink>
-        </li>
-    );
+
+
 
     getLanguagesIcons = () => (
         <li className="languages flexible aCenter">
@@ -245,7 +215,7 @@ class Header extends Component {
                     name="armenia"
                     onClick={() => this.onChangeLanguage('am')}
                     className={this.state.language === 'am' ? 'selected' : ''}
-                    />
+                />
                 <Icon
                     name="russia"
                     onClick={() => this.onChangeLanguage('ru')}
@@ -260,39 +230,7 @@ class Header extends Component {
         </li>
     )
 
-    navListForAll = () => (
-            <ul className="flexible aCenter">
-                <li className="flexible aCenter">
-                    <NavLink 
-                        to={`/${this.state.language}`} 
-                        onClick={() => this.onChangeLink('home')}
-                        className={this.state.link === 'home' ? 'selected' : ''}
-                        >
-                        {this.state.language && selectLanguage(this.state.language).header_home}
-                    </NavLink>
-                </li>
-                <li className="flexible aCenter">
-                    <NavLink 
-                        to={`/create/${this.state.language}`} 
-                        onClick={() => this.onChangeLink('create')}
-                        className={this.state.link === 'create' ? 'selected' : ''}
-                    >
-                        {this.state.language && selectLanguage(this.state.language).header_create}
-                    </NavLink>
-                </li>
-                <li className="flexible aCenter">
-                    <NavLink 
-                        to={`/shop/${this.state.language}`} 
-                        onClick={() => this.onChangeLink('shop')}
-                        className={this.state.link === 'shop' ? 'selected' : ''}
-                    >
-                        {this.state.language && selectLanguage(this.state.language).header_shop}
-                    </NavLink>
-                </li>
-                { this.props.auth.isAuthenticated ? this.authLinks() : this.guestLinks() }
-                { this.getLanguagesIcons() }
-            </ul>
-        )
+
 
 
     // toggleSignIn = () => {
@@ -302,18 +240,8 @@ class Header extends Component {
     render() {
         return (
             <header className={`Header ${this.state.headerShown ? 'headerShown' :''}`}>
-            <nav className={`flexible jBetween ${this.state.isShadowShown ? 'isShadowShown' : ''}`}>
-                <div className="logo flexible aCenter">
-                    {/* <NavLink to={`/${isAuthenticated ? 'admin' : this.state.language}`}>
-                        <div className="img" style={{ backgroundImage: `url()` }}/>
-                    </NavLink> */}
-                </div>
-                <div className="menu-wrapper" onClick={this.toggleHeader}>
-                    <div className={`hamburger-menu ${this.state.headerShown ? 'animate' : ''}`}></div>
-                </div>
-                    {this.navListForAll()}
-            </nav>
-        </header>
+                <Navigation />
+            </header>
         );
     }
 }
