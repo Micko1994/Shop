@@ -3,35 +3,25 @@ import { NavLink } from "react-router-dom";
 import { selectLanguage } from 'translate';
 
 class GenerateLi extends Component {
-    constructor(props) {
-        super(props)
-        const pathname = props.history.location.pathname.split('/');
-        const lang = pathname[pathname.length - 1]
-        const link = (pathname[1] === 'uk' || pathname[1] === 'ru' || pathname[1] === 'am') ? 'home' : pathname[1] ;
-        this.state = {
-            language: lang,
-            link: link,
-        }
-
-    }
     render () {
-        const { language, link } = this.state;
-        const LiArray = [
-            { "to": "/",        "ClassName" : "home",   "onChangeLink": "home",   "textFromObject" : "header_home" },
-            { "to": "/create/", "ClassName" : "create", "onChangeLink": "create", "textFromObject" : "header_create" },
-            { "to": "/shop/",   "ClassName" : "shop",   "onChangeLink": "shop",   "textFromObject" : "header_shop" },
-        ]
-        return (
-            <div>
-                <li className="flexible aCenter">
+        const { liArray } = this.props;
+        const { language , link } = this.props.context;
+        
+        const li = liArray.map((elem,index) => {
+            return (
+                <li key={index} className="flexible aCenter" >
                     <NavLink
-                        to={`/${language}`}
-                        onClick={() => this.onChangeLink('home')}
-                        className={link === 'home' ? 'selected' : ''}
-                    >
-                        {language && selectLanguage(language).header_home}
+                        to={`${elem.to}${language}`}
+                        onClick={() => this.onChangeLink(elem.onChangeLink)}
+                        className={link === elem.ClassName ? 'selected' : ''}>
+                        {language && selectLanguage(language)[elem.textFromObject]}
                     </NavLink>
                 </li>
+            )
+        })
+        return (
+            <div>
+                { li }
             </div>
         )
     }

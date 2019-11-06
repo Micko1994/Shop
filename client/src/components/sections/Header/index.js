@@ -6,15 +6,14 @@ import {GoodItemMini} from '../../common'
 import ReactDOM from 'react-dom';
 import { withRouter, NavLink } from 'react-router-dom';
 
-import './style.scss'
 
-import { Icon } from '../../../components/common';
+
+
 
 import { selectLanguage } from 'translate';
-
 import  { Navigation } from './sections';
 
-
+import './style.scss'
 
 class Header extends Component {
     pathname = this.props.history.location.pathname.split('/')
@@ -65,19 +64,15 @@ class Header extends Component {
     }
 
     onChangeLanguage = (language) => {
+        console.log('index.js onChangeLanguage')
         const pathName = this.props.history.location.pathname.split('/');
         pathName.pop();
         const location = pathName.length > 1 ? (pathName.join('/') + '/' + language) : '/' + language;
         this.props.history.push(location);
         this.toggleHeader();
     };
-
-    onChangeLink = (link) => {
-        this.setState({ link: link })
-        this.toggleHeader()
-    }
-
     toggleHeader = (key) => {
+        console.log('index.js toggleHeader')
         if(key === 'login') {
             this.props.toggleLogin(true);
         } else if (key === 'resume') {
@@ -87,6 +82,13 @@ class Header extends Component {
             headerShown: !this.state.headerShown,
         });
     };
+
+    onChangeLink = (link) => {
+        this.setState({ link: link })
+        this.toggleHeader()
+    }
+
+
 
     onLogoutHandle = () => (
         this.props.logout()
@@ -202,54 +204,27 @@ class Header extends Component {
         // </div>
     )
 
-
-
-
-
-
-
-    getLanguagesIcons = () => (
-        <li className="languages flexible aCenter">
-            <div className="lang-block flexible aStart">
-                <Icon
-                    name="armenia"
-                    onClick={() => this.onChangeLanguage('am')}
-                    className={this.state.language === 'am' ? 'selected' : ''}
-                />
-                <Icon
-                    name="russia"
-                    onClick={() => this.onChangeLanguage('ru')}
-                    className={this.state.language === 'ru' ? 'selected' : ''}
-                />
-                <Icon
-                    name="uk"
-                    onClick={() => this.onChangeLanguage('uk')}
-                    className={this.state.language === 'uk' ? 'selected' : ''}
-                />
-            </div>
-        </li>
-    )
-
-
-
-
     // toggleSignIn = () => {
     //     this.setState({ isSignIn: !this.state.isSignIn })
     // }
 
     render() {
+        const { headerShown, language } = this.state;
+        const functions = {
+            language,
+            headerShown,
+            link: this.state.link,
+            auth: this.props.auth,
+            onChangeLanguage: this.onChangeLanguage,
+            toggleHeader: this.toggleHeader
+        }
         return (
-            <header className={`Header ${this.state.headerShown ? 'headerShown' :''}`}>
-                <Navigation />
+            <header className={`Header ${headerShown ? 'headerShown' :''}`}>
+                <Navigation context={functions}/>
             </header>
         );
     }
 }
 
 const mapStateToProps = ({ auth, cart }) => ({ auth, cart });
-
-export default connect(
-    mapStateToProps,
-    { logout }
-)(withRouter(Header));
-
+export default connect(mapStateToProps, { logout })(withRouter(Header));
