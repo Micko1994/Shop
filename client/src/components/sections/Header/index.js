@@ -99,6 +99,7 @@ class Header extends Component {
         const { auth } = this.props;
         const functions = {
             language, headerShown, link, auth, isOpenMyProfile,
+            logout: this.props.logout,
             onChangeLink: onChangeLink.bind(this),
             onLogoutHandle: onLogoutHandle,
             handleToggleProfile: handleToggleProfile.bind(this,

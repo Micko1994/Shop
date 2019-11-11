@@ -5,7 +5,7 @@ import { selectLanguage } from 'translate';
 class GenerateLi extends Component {
     render () {
         const { liArray } = this.props;
-        const { language , link, onChangeLink, onLogoutHandle } = this.props.context;
+        const { language , link, onChangeLink, onLogoutHandle, logout } = this.props.context;
 
         const li = liArray.map((elem,index) => {
             return (
@@ -13,9 +13,12 @@ class GenerateLi extends Component {
                     <NavLink
                         to={`${elem.to}${language}`}
                         onClick={() => {
-                            onChangeLink ? onChangeLink(elem.onChangeLink(link)) : onLogoutHandle(elem.onLogoutHandle(language));
+                            typeof elem.onLogoutHandle === "string" ?
+                                  onLogoutHandle(logout)
+                                : onChangeLink(elem.onChangeLink);
                         }}
                         className={link === elem.ClassName ? 'selected' : ''}>
+
                         {language && selectLanguage(language)[elem.textFromObject]}
                     </NavLink>
                 </li>

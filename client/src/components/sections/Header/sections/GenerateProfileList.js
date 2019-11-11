@@ -6,7 +6,7 @@ const generateMyProfileList = (language,link) => {
     const li = [
         {"to": "/profile/", "onChangeLink": "profile", "ClassName" : "profile", "textFromObject" : "header_my_profile"},
         {"to": "/order/", "onChangeLink": "order", "ClassName" : "order", "textFromObject" : "header_my_orders"},
-        {"to": "/sign_out/", "onLogoutHandle": "sign_out", "ClassName" : "order", "textFromObject" : "header_sign_out"},
+        {"to": "/sign_in/", "onLogoutHandle": "sign_out", "ClassName" : "order", "textFromObject" : "header_sign_out"},
     ]
     return (
         <div className='flexible_my_profile'>

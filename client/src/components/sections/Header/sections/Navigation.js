@@ -23,7 +23,7 @@ class Navigation extends Component {
                 <div className="menu-wrapper" onClick={this.toggleHeader}>
                     <div className={`hamburger-menu ${ headerShown ? 'animate' : ''}`}></div>
                 </div>
-                <NavListForAll context={context} />
+                <NavListForAll context />
             </nav>
         )
     }

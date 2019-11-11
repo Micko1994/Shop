@@ -1,10 +1,14 @@
 import ReactDOM from "react-dom";
 
 const onChangeLink = (link) => {
+    alert(1)
     this.setState({ link: link })
     this.toggleHeader()
 }
-const onLogoutHandle = (logout) =>  logout()
+const onLogoutHandle = (logout) =>  {
+    alert(2)
+    logout()
+}
 const handleToggleProfile = (func, isOpenMyProfile) => {
     if (!isOpenMyProfile) {
         // attach/remove event handler
