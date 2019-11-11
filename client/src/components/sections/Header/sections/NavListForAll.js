@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import GenerateLi from "./GenerateLi";
 import GuestAndAuthLinks from "./GuestAndAuthLinks";
 
+
 class NavListForAll extends Component {
     render() {
         const { context } = this.props;
