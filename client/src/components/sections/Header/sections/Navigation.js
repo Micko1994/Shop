@@ -4,9 +4,8 @@ import NavListForAll  from './NavListForAll';
 class Navigation extends Component {
     constructor(props) {
         super(props)
-        const { headerShown } = props.context;
         this.state = {
-            headerShown: headerShown,
+            headerShown: props.context.headerShown,
             isShadowShown: false
         }
     }

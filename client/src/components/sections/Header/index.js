@@ -78,22 +78,14 @@ class Header extends Component {
         });
     };
 
+
+
+// *********************************************************************************************
     onChangeLink = (link) => {
         this.setState({ link: link })
         this.toggleHeader()
     }
-
-
-// *********************************************************************************************
-
-
-
-
-
-
-    onLogoutHandle = () => (
-        this.props.logout()
-    )
+    onLogoutHandle = () => this.props.logout()
     handleToggleProfile = () => {
         if (!this.state.isOpenMyProfile) {
             // attach/remove event handler
@@ -111,38 +103,7 @@ class Header extends Component {
         }
         this.handleToggleProfile();
     }
-    generateMyProfileList = () => {
-        const { language } = this.state;
-
-        const li = [
-            {"to": "/profile/" + language, "onChangeLink": "profile", "ClassName" : "profile", "textFromObject" : "header_my_profile"},
-            {"to": "/order/" + language, "onChangeLink": "order", "ClassName" : "order", "textFromObject" : "header_my_orders"},
-            {"to": "/sign_out/" + language, "onLogoutHandle": "sign_out", "ClassName" : "order", "textFromObject" : "header_sign_out"},
-        ]
-        return (
-            <div className='flexible_my_profile'>
-                <div className='arrow_modal'>
-                </div>
-                <ul className="flexible vertical jStart aCCenter my_profile_list">
-                    <GenerateLi liArray={li}/>
-                </ul>
-            </div>
-        )
-    }
-
-
-
-
-
-
 // *********************************************************************************************
-
-
-
-
-
-
-
 
     // handleToggleCart = () => {
     //     if (!this.state.isOpenCart) {
@@ -165,46 +126,19 @@ class Header extends Component {
     //     }
     //     this.handleToggleCart();
     // }
-    handleCardRef = (ref) => {
-        this.cardRef = ref;
-    }
 
-    generateCart = () => (
-        this.props.history.push('/my_cart/' + this.state.language)
-        // <div ref={this.handleCardRef} className='flexible_my_profile flexible_my_cart'>
-        //     <div className='arrow_modal'>
-        //     </div>
-        //     <div className="my_profile_list_cart">
-        //         your cart is empty
-        //         {/* <GoodItemMini /> */}
-        //         {/* {this.props.cart.payload.cart.goods.map((item) => (
-        //             <GoodItemMini
-        //                 path={item.image}
-        //                 name={item.name}
-        //                 old_price={item.old_price}
-        //                 current_price={item.current_price}
-        //                 // onCartClick={(item) => this.onCartClick(item)}
-        //                 id={item._id}
-        //             />
-        //         ))
-        //         }
-        //         {console.log('this.state in header:', this.state)}
-        //         {console.log('this.props in header:', this.props)} */}
-        //     </div>
-        // </div>
-    )
 
     // toggleSignIn = () => {
     //     this.setState({ isSignIn: !this.state.isSignIn })
     // }
 
     render() {
-        const { headerShown, language } = this.state;
+        const { headerShown, language, link, isOpenMyProfile } = this.state;
+        const { auth } = this.props;
         const functions = {
-            language,
-            headerShown,
-            link: this.state.link,
-            auth: this.props.auth,
+            language, headerShown, link, auth, isOpenMyProfile,
+            onLogoutHandle: this.onLogoutHandle,
+            handleToggleProfile: this.handleToggleProfile,
             onChangeLanguage: this.onChangeLanguage,
             toggleHeader: this.toggleHeader
         }

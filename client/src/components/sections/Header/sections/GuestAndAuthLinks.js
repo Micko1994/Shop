@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import GenerateLi from "./GenerateLi";
 import { withRouter } from 'react-router-dom';
 import GetLanguagesIcons from './GetLanguagesIcons';
+import generateMyProfileList from './GenerateProfileList';
+import { generateCart } from './GenerateCart';
 import { Icon } from '../../../../components/common';
 
 class GuestAndAuthLinks extends Component {
     constructor(props){
         super(props)
-
         this.state = {
-            language: props.language ,
+            language: props.context.language,
             link: props.link,
         }
     }
@@ -18,41 +19,36 @@ class GuestAndAuthLinks extends Component {
         const li = [
             { "to": "/sign_in/", "onChangeLink": "sign_in", "ClassName" : "sign_in", "textFromObject" : "header_sign_in" }
         ]
-        return (
-            <GenerateLi context={context} liArray={li}/>
-        )
+        return <GenerateLi context={context} liArray={li}/>
     };
     authLinks = () => {
+        const { language } = this.state;
+        const { isOpenMyProfile, handleToggleProfile, link } = this.props.context;
+
         return (
             <div className="flexible horizontal jAround jCenter auth_links_icons">
-                <div className="flexible auth_links_icons_item"  onClick={() => this.handleToggleProfile()} ref={node => this.nodeProfile = node}>
+                <div className="flexible auth_links_icons_item"  onClick={() => handleToggleProfile()} ref={node => this.nodeProfile = node}>
                     <Icon name='profile'/>
-                    {this.state.isOpenMyProfile ? this.generateMyProfileList() : null }
+                    {isOpenMyProfile ? generateMyProfileList(language,link) : null }
                 </div>
                 <div className="flexible auth_links_icons_item" ref={node => this.nodeProfile = node}>
                     <Icon name='wallet'/>
                 </div>
                 <div className="flexible auth_links_icons_item" ref={node => this.nodeCart = node}>
-                    <Icon onClick={() => this.generateCart()} name='shopping_card'/>
-                    {console.log('this.props.cart 112233', this.props.cart)}
-                    {console.log('this.props.cart.count 11223344', this.props.count)}
+                    <Icon onClick={() => generateCart(language)} name='shopping_card'/>
                     {/* {this.props.cart.goods ? this.props.cart.goods.reduce((prev, cur) => prev + cur.count, 0) : null} */}
-                    {/* {this.state.isOpenCart ?
-                    this.generateCart()
-                : null } */}
+                    {/* {this.state.isOpenCart ? this.generateCart() : null } */}
                 </div>
             </div>
         )
     }
 
-
     render () {
-        const { isAuthenticated } = this.props.context.auth;
-        const { context } = this.props;
+        const { isAuthenticated,onChangeLanguage, language } = this.props.context.auth;
         return (
             <div>
                 {isAuthenticated ? this.authLinks() : this.guestLinks()}
-                <GetLanguagesIcons context={context} />
+                <GetLanguagesIcons onChangeLanguage={onChangeLanguage} language={language}  />
             </div>
         )
     }

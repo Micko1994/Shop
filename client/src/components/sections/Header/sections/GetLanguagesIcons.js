@@ -3,7 +3,7 @@ import {Icon} from "../../../common";
 
 class GetLanguagesIcons extends Component {
     render (){
-        const { onChangeLanguage, language } = this.props.context;
+        const { onChangeLanguage, language } = this.props;
         return (
             <li className="languages flexible aCenter">
                 <div className="lang-block flexible aStart">
