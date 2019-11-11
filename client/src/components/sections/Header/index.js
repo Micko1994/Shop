@@ -7,6 +7,7 @@ import  { Navigation } from './sections';
 import { onChangeLink, onLogoutHandle, handleToggleProfile } from './sections/Functions'
 
 import './style.scss'
+
 class Header extends Component {
     pathname = this.props.history.location.pathname.split('/')
     lang = this.pathname[this.pathname.length - 1]
