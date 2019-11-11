@@ -31,11 +31,9 @@ class Header extends Component {
         link: this.link,
         count: 0
     };
-
     static propTypes = {
         auth: PropTypes.object.isRequired
     };
-
 
     // toggle = () => {
     //     this.setState({
@@ -47,7 +45,6 @@ class Header extends Component {
             dropdownOpen: !this.state.dropdownOpen
         })
     }
-
     componentWillMount(){
         this.setState({ language: this.props.lang })
     }
@@ -55,14 +52,12 @@ class Header extends Component {
         this.setState({ language: nextProps.lang })
         this.updateState();
     }
-
     updateState() {
         // this.props.getCarts()
         this.setState({
             language: this.props.history.location.pathname.split('/')[this.props.history.location.pathname.split('/').length - 1],
         });
     }
-
     onChangeLanguage = (language) => {
         console.log('index.js onChangeLanguage')
         const pathName = this.props.history.location.pathname.split('/');
@@ -89,11 +84,16 @@ class Header extends Component {
     }
 
 
+// *********************************************************************************************
+
+
+
+
+
 
     onLogoutHandle = () => (
         this.props.logout()
     )
-
     handleToggleProfile = () => {
         if (!this.state.isOpenMyProfile) {
             // attach/remove event handler
@@ -103,7 +103,6 @@ class Header extends Component {
         }
         this.setState({isOpenMyProfile: !this.state.isOpenMyProfile});
     }
-
     handleOutsideClick = (e) => {
         const node = ReactDOM.findDOMNode(this.nodeProfile);
         // ignore clicks on the component itself
@@ -112,6 +111,38 @@ class Header extends Component {
         }
         this.handleToggleProfile();
     }
+    generateMyProfileList = () => {
+        const { language } = this.state;
+
+        const li = [
+            {"to": "/profile/" + language, "onChangeLink": "profile", "ClassName" : "profile", "textFromObject" : "header_my_profile"},
+            {"to": "/order/" + language, "onChangeLink": "order", "ClassName" : "order", "textFromObject" : "header_my_orders"},
+            {"to": "/sign_out/" + language, "onLogoutHandle": "sign_out", "ClassName" : "order", "textFromObject" : "header_sign_out"},
+        ]
+        return (
+            <div className='flexible_my_profile'>
+                <div className='arrow_modal'>
+                </div>
+                <ul className="flexible vertical jStart aCCenter my_profile_list">
+                    <GenerateLi liArray={li}/>
+                </ul>
+            </div>
+        )
+    }
+
+
+
+
+
+
+// *********************************************************************************************
+
+
+
+
+
+
+
 
     // handleToggleCart = () => {
     //     if (!this.state.isOpenCart) {
@@ -122,7 +153,6 @@ class Header extends Component {
     //     }
     //     this.setState({isOpenCart: !this.state.isOpenCart});
     // }
-
     // handleOutsideClickCart = (e) => {
     //     const node = ReactDOM.findDOMNode(this.nodeCart);
     //     // ignore clicks on the component itself
@@ -135,46 +165,6 @@ class Header extends Component {
     //     }
     //     this.handleToggleCart();
     // }
-
-
-
-
-    generateMyProfileList = () => (
-        <div className='flexible_my_profile'>
-            <div className='arrow_modal'>
-            </div>
-            <ul className="flexible vertical jStart aCCenter my_profile_list">
-                <li className="flexible aCenter">
-                    <NavLink
-                        to={`/profile/${this.state.language}`}
-                        onClick={() => this.onChangeLink('profile')}
-                        className={this.state.link === 'profile' ? 'selected' : ''}
-                    >
-                        {this.state.language && selectLanguage(this.state.language).header_my_profile}
-                    </NavLink>
-                </li>
-                <li className="flexible aCenter">
-                    <NavLink
-                        to={`/order/${this.state.language}`}
-                        onClick={() => this.onChangeLink('order')}
-                        className={this.state.link === 'order' ? 'selected' : ''}
-                    >
-                        {this.state.language && selectLanguage(this.state.language).header_my_orders}
-                    </NavLink>
-                </li>
-                <li className="flexible aCenter">
-                    <NavLink
-                        to={`/sign_in/${this.state.language}`}
-                        onClick={() => this.onLogoutHandle()}
-                        className={this.state.link === 'sign_out' ? 'selected' : ''}
-                    >
-                        {this.state.language && selectLanguage(this.state.language).header_sign_out}
-                    </NavLink>
-                </li>
-            </ul>
-        </div>
-    )
-
     handleCardRef = (ref) => {
         this.cardRef = ref;
     }
