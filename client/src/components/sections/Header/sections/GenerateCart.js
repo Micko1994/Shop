@@ -1,3 +1,5 @@
+import {GoodItemMini} from '../../../common'
+
 const handleCardRef = (ref) => {
     this.cardRef = ref;
 }
@@ -21,8 +23,6 @@ export const generateCart = (language) => (
     //             />
     //         ))
     //         }
-    //         {console.log('this.state in header:', this.state)}
-    //         {console.log('this.props in header:', this.props)} */}
     //     </div>
     // </div>
 )

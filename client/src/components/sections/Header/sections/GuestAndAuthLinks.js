@@ -24,7 +24,6 @@ class GuestAndAuthLinks extends Component {
     authLinks = () => {
         const { language } = this.state;
         const { isOpenMyProfile, handleToggleProfile, link } = this.props.context;
-
         return (
             <div className="flexible horizontal jAround jCenter auth_links_icons">
                 <div className="flexible auth_links_icons_item"  onClick={() => handleToggleProfile()} ref={node => this.nodeProfile = node}>
@@ -44,11 +43,13 @@ class GuestAndAuthLinks extends Component {
     }
 
     render () {
-        const { isAuthenticated,onChangeLanguage, language } = this.props.context.auth;
+        const { isAuthenticated } = this.props.context.auth;
+        const { onChangeLanguage, language } = this.props.context;
         return (
             <div>
                 {isAuthenticated ? this.authLinks() : this.guestLinks()}
-                <GetLanguagesIcons onChangeLanguage={onChangeLanguage} language={language}  />
+                <GetLanguagesIcons onChangeLanguage={onChangeLanguage}
+                                   language={language} />
             </div>
         )
     }
