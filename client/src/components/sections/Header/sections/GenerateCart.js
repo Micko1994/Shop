@@ -4,8 +4,8 @@ const handleCardRef = (ref) => {
     this.cardRef = ref;
 }
 
-export const generateCart = (language) => (
-    this.props.history.push('/my_cart/' + language)
+export const generateCart = (history,language) => (
+    history.push('/my_cart/' + language)
     // <div ref={this.handleCardRef} className='flexible_my_profile flexible_my_cart'>
     //     <div className='arrow_modal'>
     //     </div>

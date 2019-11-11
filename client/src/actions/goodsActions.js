@@ -71,7 +71,7 @@ export const deleteGoods = id => (dispatch, getState) => {
 };
 
 export const getUserCart = () => (dispatch, getState) => {
-    console.log(1212312312312312)
+
     dispatch(setGoodsLoading());
     axios
         .get('/api/goods/user_cart', tokenConfig(getState))

@@ -34,7 +34,7 @@ class GuestAndAuthLinks extends Component {
                     <Icon name='wallet'/>
                 </div>
                 <div className="flexible auth_links_icons_item" ref={node => this.nodeCart = node}>
-                    <Icon onClick={() => generateCart(language)} name='shopping_card'/>
+                    <Icon onClick={() => generateCart(this.props.history, language)} name='shopping_card'/>
                     {/* {this.props.cart.goods ? this.props.cart.goods.reduce((prev, cur) => prev + cur.count, 0) : null} */}
                     {/* {this.state.isOpenCart ? this.generateCart() : null } */}
                 </div>
