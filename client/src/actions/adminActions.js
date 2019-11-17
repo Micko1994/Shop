@@ -15,9 +15,9 @@ export const loginAdmin = ({ email, password }) => (dispatch) => {
     // User loading
     dispatch({ type: USER_LOADING });
 
-    console.log('shssbsugsyjgsyj')
+
     const body = ({ email, password });
-    console.log('body::', body)
+
 
     axios
         .post('/api/bk_map_19', body)
@@ -46,7 +46,7 @@ export const loginAdmin = ({ email, password }) => (dispatch) => {
 
 //     // Request body
 //     const body = JSON.stringify({ email, password });
-//     console.log('body::', body)
+
 //     axios
 //         .post('/api/auth', body, config)
 //         .then(res =>

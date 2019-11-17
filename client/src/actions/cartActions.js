@@ -4,7 +4,7 @@
 // import { returnErrors } from './errorActions';
 
 // export const getCarts = () => (dispatch, getState) => {
-//     console.log(1212312312312312)
+
 //     dispatch(setCartLoading());
 //     axios
 //         .get('/api/cart', tokenConfig(getState))
@@ -20,7 +20,7 @@
 // };
 
 // export const changeCart = cart => (dispatch, getState) => {
-//     console.log('cart::', cart)
+
 //     axios
 //         .post('/api/cart', cart, tokenConfig(getState))
 //         .then(res =>
@@ -31,7 +31,7 @@
 //             return res
 //             })
 //         // .then((gas) => {
-//         //     console.log('gas--', gas)
+
 //         //     return gas
 //         // })
 //         .catch(err =>

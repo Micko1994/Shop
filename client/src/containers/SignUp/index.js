@@ -54,9 +54,6 @@ class SignUp extends Component {
 
     componentDidUpdate(prevProps) {
         const { error, isAuthenticated } = this.props;
-        console.log('error:::', error)
-        console.log('isAuthenticated:::', isAuthenticated)
-        console.log('prevProps:::', prevProps)
         if (error !== prevProps.error) {
             // Check for register error
             if (error.id === 'REGISTER_FAIL') {
@@ -71,7 +68,7 @@ class SignUp extends Component {
     }
 
     // componentWillUpdate(prevProps){
-    //     console.log('prevProps in componentWillUpdate::', prevProps)
+
     // }
 
     onChange = e => {
@@ -95,13 +92,12 @@ class SignUp extends Component {
         // this.props.authorizeUser(newUser).then((data) =>{
         //     if(data) {
         //         this.setState({ isLoading: false });
-        //         console.log('data: in promise::',data)
+
         //         // window.localStorage.setItem("token", data.payload.token);
         //         this.forceUpdate();
         //         return this.props.history.push('/profile/' + this.state.language)
         //     }
         // });
-        // .then(() => console.log('mtav promisi mej!!'))
         this.props.register(newUser)
         // this.setState({ isLoading: false });
     };

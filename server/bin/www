@@ -36,13 +36,12 @@ io.set('authorization', passportSocketIo.authorize({
   key: config.COOKIE.KEY, // the name of the cookie where express/connect stores its session_id
   secret: config.COOKIE.SECRET, // the session_secret to parse the cookie
   success: function (data, accept) { // *optional* callback on success - read more below
-    console.log('success')
+
     require('../routes-io/index')(io)
     accept(null, true)
   },
   fail: function (data, message, error, accept) {
-    console.log(message)
-    console.log(error)
+
   }
 }))
 
@@ -90,11 +89,11 @@ function onError (error) {
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges')
+
       process.exit(1)
       break
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use')
+
       process.exit(1)
       break
     default:
@@ -111,5 +110,4 @@ function onListening () {
   const bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port
-  console.log('Listening on ' + bind)
 }

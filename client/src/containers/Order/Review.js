@@ -31,7 +31,6 @@ class Review extends Component {
     }
     render(){
         const { userGoods, user } = this.props
-        console.log('userGoods;', this.props)
         return (
             <React.Fragment>
               <Typography variant="h6" gutterBottom>

@@ -18,8 +18,8 @@ module.exports = (app) => {
             useCreateIndex: true,
             useFindAndModify: false
         }) // Adding new mongo url parser
-        .then(() => console.log('MongoDB Connected...'))
-        .catch(err => console.log(err));
+        .then(() => {})
+        .catch(err => {});
 
     // Use Routes
     app.use('/api/bk_map_19', require('./routes/api/admin'));
@@ -43,5 +43,5 @@ module.exports = (app) => {
 
     const port = process.env.PORT || 5090;
 
-    app.listen(port, () => console.log(`Server started on port ${port}`));
+    app.listen(port, () => {});
 }

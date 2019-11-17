@@ -35,7 +35,7 @@ app.use(session({
 }))
 
 
-console.log('app use session!!!', session)
+
 
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
@@ -59,7 +59,7 @@ app.use(function (req, res, next) {
   req.method === 'OPTIONS' ? res.sendStatus(200) : next()
 })
 
-console.log(' * * * STARTING * * * ')
+
 
 require('./routes')(app)
 

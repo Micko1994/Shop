@@ -80,7 +80,7 @@ function getStepContent(step) {
 }
 
 const getOrder = () => {
-  console.log('patvirvec!!!')
+
 }
 
 export default function Checkout() {
@@ -106,7 +106,6 @@ export default function Checkout() {
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map(label => (
                 <Step key={label}>
-                {console.log('label::',label)}
                 <StepLabel
                     StepIconProps={{
                         classes: { 

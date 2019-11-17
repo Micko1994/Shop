@@ -104,7 +104,6 @@ class ContactUs extends PureComponent{
                                     autoComplete="email"
                                     autoFocus
                                 />
-                                {console.log('this.props.auth in contact us:', this.props)}
                                 <TextField
                                     variant="outlined"
                                     id="text"

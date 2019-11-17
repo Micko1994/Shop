@@ -19,7 +19,7 @@ import {
 export const loadUser = () => (dispatch, getState) => {
     // User loading
     dispatch({ type: USER_LOADING });
-
+    console.log(tokenConfig(getState))
     axios
         .get('/api/auth/user', tokenConfig(getState))
         .then(res =>
@@ -45,7 +45,6 @@ export const register = ({ name, surname, address, email, password }) => dispatc
         }
     };
 
-    console.log(242423)
 
     // Request body
     const body = JSON.stringify({ name, surname, address, email, password });
@@ -58,7 +57,6 @@ export const register = ({ name, surname, address, email, password }) => dispatc
             })
         )
         .catch(err => {
-            console.log('err::', err)
             dispatch(
                 returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL')
             );
@@ -86,7 +84,6 @@ export const login = ({ email, password }) => dispatch => {
 
     // Request body
     const body = JSON.stringify({ email, password });
-    console.log('body::', body)
     axios
         .post('/api/auth', body, config)
         .then(res =>
@@ -125,6 +122,7 @@ export const tokenConfig = getState => {
     };
 
     // If token, add to headers
+    console.log(token)
     if (token) {
         config.headers['x-auth-token'] = token;
     }

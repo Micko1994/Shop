@@ -4,7 +4,6 @@ import { tokenConfig } from './authActions';
 import { returnErrors } from './errorActions';
 
 export const getGoods = (goods_type) => dispatch => {
-    console.log(1212312312312312)
     dispatch(setGoodsLoading());
     axios
         .get('/api/goods', {
@@ -20,7 +19,7 @@ export const getGoods = (goods_type) => dispatch => {
             // return res.data
         )
         // .then((data) => {
-        //     console.log('dtata::', data)
+
         //     return data
         // })
         .catch(err =>

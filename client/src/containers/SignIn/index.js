@@ -76,7 +76,7 @@ class SignIn extends Component {
         };
 
         // Attempt to login
-        console.log('this props sxal texum::', this.props)
+
         this.props.login(user);
     };
 
@@ -200,7 +200,6 @@ class SignIn extends Component {
     }
 
     render() {
-        console.log(11111111111111111111111111111111111111)
         return (
             <section className="Main">
                 { this.generateAdminMAinPage() }

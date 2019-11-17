@@ -10,9 +10,6 @@ const auth = require('../../middleware/auth');
 router.post('/', (req, res, next) => {
     const { email, password } = req.body;
 
-    console.log('req.body in admin in:', req.body)
-    console.log('req.query in admin in:', req.query)
-    console.log('req.params in admin in:', req.params)
     // Simple validation
     if (!email || !password) {
         return res.status(400).json({ msg: 'Please enter all fields' });
@@ -63,7 +60,7 @@ router.get('/admin', auth, (req, res) => {
 //         return res.status(400).json({ msg: 'Please enter all fields' });
 //     }
 
-//     console.log('req.body:;', req.body)
+
 //     // Check for existing user
 //     User.findOne({ email })
 //         .then(user => {

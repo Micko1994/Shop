@@ -54,7 +54,6 @@ export default class Home extends Component {
 
     render() {
         // const { posts } = this.props;
-        console.log(123123123)
         return (
             <section className="HomeMain">
                 <div className="HomeMainContainer">

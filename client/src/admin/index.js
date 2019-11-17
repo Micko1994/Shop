@@ -45,9 +45,6 @@ class Admin extends React.PureComponent{
 
     componentDidUpdate(prevProps) {
         const { error, isAuthenticated } = this.props;
-        console.log('error:::', error)
-        console.log('isAuthenticated:::', isAuthenticated)
-        console.log('prevProps:::', prevProps)
         if (error !== prevProps.error) {
             // Check for register error
             if (error.id === 'AUTH_ERROR') {
@@ -63,7 +60,6 @@ class Admin extends React.PureComponent{
 
 
     // componentWillMount() {
-    //     console.log('componentWillMount state:', this.state)
     //     if(window.localStorage.token) {
     //         this.setState({ isLoading: true });
     //         // this.props.loginAdmin({ token: window.localStorage.token })
@@ -93,10 +89,9 @@ class Admin extends React.PureComponent{
 
 
     onSignIn = () => {
-        console.log('this state in admin:', this.state)
-        this.setState({ isLoading: true });
+
         const a =  this.props.loginAdmin(this.state.userSignInInfo)
-        console.log('aaaa:', a)
+
         // .then((data) =>{
         //     if(data) {
         //         this.setState({ isLoading: false });
@@ -112,8 +107,6 @@ class Admin extends React.PureComponent{
       if(this.state.isLoading) {
           return <div className="Spinner"/>
       } else if (this.props.isAuthenticated) {
-          console.log('in rendr yeisminch::::', this.state)
-          console.log('in rendr yeisminch::::props:::', this.props)
         this.props.history.push('/bk_map_19')
         // this.forceUpdate();
         return  <Switch>
@@ -162,8 +155,7 @@ class Admin extends React.PureComponent{
 
 
     render(){
-        console.log('admin render:', this.state)
-        console.log('admin render props:', this.props)
+
         return(
             <div className="Admin">
                 { this.generateAdminMAinPage() }

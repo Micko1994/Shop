@@ -43,12 +43,12 @@ class Shop extends PureComponent {
         a: false
     };
     componentWillReceiveProps(nextProps) {
-        console.log('nextProps::', nextProps)
+
         // this.setState({ a: true }, () => {
         //     nextProps.auth.isAuthenticated && this.state.a ? this.props.getCarts() : null
         // })
         this.updateState();
-        console.log('nextProps this,props::', this.props)
+
     }    
     
     updateState() {
@@ -59,7 +59,7 @@ class Shop extends PureComponent {
     }
     
     componentDidMount(){
-        console.log('auth in shoppppp::', this.props)
+
         this.props.getGoods('shirt')
         this.props.getCarts().then((data) => {
             this.setState({
@@ -67,7 +67,7 @@ class Shop extends PureComponent {
                 count: data.payload.cart.goods.reduce((prev, cur) => prev + cur.count, 0)
             })
         })
-        console.log("dwedwedwedfwedfwedwefdwefwefwef", this.props)
+
     }
     
     
@@ -161,12 +161,8 @@ class Shop extends PureComponent {
             good_id: id,
             count: 1,
         }
-
-        console.log('this state in addItemToCart:', this.state)
-        console.log('this props in addItemToCart:', this.props)
         const existingGoods = this.state.cart.filter(p => p.good_id === cartInfo.good_id);
 
-        console.log('existingGoods::', existingGoods)
         if (existingGoods.length > 0) {
     
             const withoutExistingGoods = this.state.cart.filter(p => p.good_id !== cartInfo.good_id);
@@ -190,9 +186,7 @@ class Shop extends PureComponent {
     }
 
     addGoodToCart(id){
-        // console.log('id in add cart:', id),
-        // console.log('state in add cart:', this.state),
-        // console.log('props in add cart:', this.props)
+
         this.props.auth.isAuthenticated ? this.addItemToCart(id) : this.setState({ openAlert: true })
     }
 
@@ -205,18 +199,18 @@ class Shop extends PureComponent {
     }
     
     addCartToStore(){
-        console.log('stateefweferwferferf:::::::', this.state)
+
         this.props.changeCart(this.state.cart)
     }
 
     onCartClick(item){
-        // console.log('e.target::::', item.currentTarget)
+
         const id = item.currentTarget.id
         this.addGoodToCart(id)
     }
 
     createGoods(goodItems){
-        // console.log('goodItems  wjbfjwebfjw::', goodItems)
+
         if(this.props.loading) {
             return <div className="Spinner"/>
         }

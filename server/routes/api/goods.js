@@ -6,10 +6,7 @@ const Goods = require('../../models/goods');
 const Cart = require('../../models/cart');
 
 router.get('/', (req, res) => {
-    // console.log('req.body::', req.body)
-    // console.log('req.params::', req.params)
-    // console.log('req.query::', req.query)
-    // console.log('req::', req)
+
     const goods_type = req.query.goods_type || ''
     const findGoods = () => goods_type ? Goods.find({ goods_type }) : Goods.find()
     const search = req.body.search || ''
@@ -24,11 +21,6 @@ router.get('/', (req, res) => {
 });
 
 router.get('/user_cart', auth, (req, res) => {
-    // console.log('req.body::', req.body)
-    // console.log('req.params::', req.params)
-    // console.log('req.query::', req.query)
-    // console.log('req::', req)
-    console.log('req.user:', req.user)
     const user_id = req.user.id
 
     Cart.findOne({user_id})
@@ -65,9 +57,6 @@ router.get('/user_cart', auth, (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    console.log("bazayi newProduct-", req.body)
-
-    // console.log("file---", file)
     const newGood = new Goods({
         name: req.body.name,
         description: req.body.description,

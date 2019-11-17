@@ -12,7 +12,7 @@ export default class AlertDialog extends PureComponent {
   }
 
   render(){
-    console.log('this.props.handleCloseAlert::', this.props)
+
     return (
       <div>
         <Dialog

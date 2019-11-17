@@ -10,7 +10,6 @@ import { connect, useSelector } from 'react-redux';
 class AddressForm extends Component {
     render(){
         const { user } = this.props
-        console.log('user:', this.props)
         return (
             <React.Fragment>
               <Typography variant="h6" gutterBottom>

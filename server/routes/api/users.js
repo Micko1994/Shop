@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
         return res.status(400).json({ msg: 'Please enter all fields' });
     }
 
-    console.log('req.body:;', req.body)
+
     // Check for existing user
     User.findOne({ email })
         .then(user => {

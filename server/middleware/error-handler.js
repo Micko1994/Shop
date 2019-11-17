@@ -3,7 +3,7 @@
 module.exports = {
   handleError: () => {
     return (err, req, res, next) => {
-      console.log('***ERROR***', err)
+
 
       const errorMessage = err.message || 'Something went wrong.'
 

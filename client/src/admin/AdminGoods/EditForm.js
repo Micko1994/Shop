@@ -32,7 +32,7 @@ export default class EditForm extends React.PureComponent{
     );
 
     render(){
-        console.log(this.state)
+
         return(
             <ValidatableForm
                 className=" ValidatableForm "

@@ -47,7 +47,6 @@ class MyCart extends PureComponent {
     }
 
     render(){
-        console.log('this.props in my cart render:', this.props)
         return (
             <section className="MyCart withStretch flexible vertical">
                 {this.state.isPaymentOpen ? 
